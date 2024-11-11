@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -227,19 +228,6 @@
     </VBox>
     <AnchorPane id="lblNoClass" fx:id="classpane" layoutX="223.0" layoutY="2.0" prefHeight="686.0" prefWidth="1041.0" style="-fx-background-color: white; -fx-background-radius: 25;" visible="false">
          <children>
-            <VBox fx:id="ClassVBox" layoutX="115.0" layoutY="95.0" prefHeight="425.0" prefWidth="505.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 25; -fx-border-radius: 50;">
-               <children>
-                  <HBox prefHeight="62.0" prefWidth="493.0">
-                     <children>
-                        <Label fx:id="lblNoClass" prefHeight="62.0" prefWidth="521.0" text="No Classes Available">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
             <Button id="btnAddClass" layoutX="33.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleAddClasses" prefHeight="62.0" prefWidth="82.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: black;" styleClass="cursor_hand" stylesheets="@../../../loginpage.css" text="Add" textFill="WHITE">
                <font>
                   <Font size="18.0" />
@@ -250,6 +238,23 @@
                   <Font name="Calibri Bold" size="24.0" />
                </font>
             </Label>
+            <ScrollPane fitToWidth="true" layoutX="50.0" layoutY="104.0" prefHeight="482.0" prefWidth="576.0">
+               <content>
+                  <VBox fx:id="ClassVBox" prefHeight="476.0" prefWidth="569.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 25; -fx-border-radius: 50;">
+                     <children>
+                        <HBox prefHeight="62.0" prefWidth="493.0">
+                           <children>
+                              <Label fx:id="lblNoClass" prefHeight="62.0" prefWidth="521.0" text="No Classes Available">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </children>
     </AnchorPane>
   </children>

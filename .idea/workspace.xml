@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6583bdd-abd4-4fab-a4bb-871bfc0d9566" name="Changes" comment="" />
+    <list default="true" id="a6583bdd-abd4-4fab-a4bb-871bfc0d9566" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/classcardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/classcard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/ClassModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/ClassModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/addclass.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/addclass.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/hello-view.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +26,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/resources/com/example/kamwaro/hello-view.fxml" root0="SKIP_INSPECTION" />
@@ -43,6 +54,7 @@
     "Application.LoginForm.executor": "Run",
     "Application.MyConfig.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "C:/Users/kariu/IdeaProjects/kamwaro/src/main/resources/com/example/kamwaro",
     "last_opened_file_path": "C:/Users/kariu/Downloads/mysql-connector-j-9.1.0/mysql-connector-j-9.1.0/mysql-connector-j-9.1.0.jar",

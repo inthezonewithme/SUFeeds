@@ -22,15 +22,14 @@
                   </ImageView>
                </children>
             </HBox>
+            <HBox prefHeight="45.0" prefWidth="301.0" />
+            <HBox prefHeight="43.0" prefWidth="301.0">
+               <children>
+                  <TextField fx:id="ClassCodeField" prefHeight="39.0" prefWidth="239.0" promptText="Unit Code" style="-fx-background-radius: 50; -fx-border-radius: 50;" />
+               </children></HBox>
             <HBox prefHeight="45.0" prefWidth="301.0">
                <children>
-                  <TextField fx:id="ClassCodeField"  prefHeight="39.0" prefWidth="239.0" promptText="Unit Code" style="-fx-background-radius: 50; -fx-border-radius: 50;" />
-               </children>
-            </HBox>
-            <HBox prefHeight="43.0" prefWidth="301.0" />
-            <HBox prefHeight="45.0" prefWidth="301.0">
-               <children>
-                  <TextField fx:id="ClassNameField"  prefHeight="38.0" prefWidth="239.0" promptText="Unit Name" style="-fx-background-radius: 50; -fx-border-radius: 50;" />
+                  <TextField fx:id="ClassNameField" prefHeight="38.0" prefWidth="239.0" promptText="Unit Name" style="-fx-background-radius: 50; -fx-border-radius: 50;" />
                </children>
             </HBox>
             <HBox prefHeight="63.0" prefWidth="301.0" />

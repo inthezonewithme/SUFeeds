@@ -3,6 +3,7 @@ package com.example.kamwaro;
 public class ClassModel {
     private String className;
     private String classCode;
+    private String dateAdded;
 
     // Constructor
     public ClassModel(String className, String classCode) {

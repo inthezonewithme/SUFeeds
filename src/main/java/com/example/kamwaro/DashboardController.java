@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -13,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -52,6 +54,8 @@ public class DashboardController {
 
     @FXML
     private TextField ClassCodeField;
+
+
 
     @FXML
     private VBox ClassVBox;
@@ -160,6 +164,7 @@ public class DashboardController {
             while (rs.next()) {
                 String className = rs.getString("Class_Name");
                 String classCode = rs.getString("Class_ID");
+
                 // Create a ClassModel instance for each class
                 ClassModel classModel = new ClassModel(className, classCode);
                 classes.add(classModel);  // Add to the list
@@ -228,25 +233,35 @@ public class DashboardController {
         }
     }
 
+    @FXML
     private void refreshClassesVBox() {
         if (ClassVBox == null) {
             System.out.println("ClassVBox is not initialized yet.");
             return;  // Early return if ClassVBox is not ready
         }
-        ClassVBox.getChildren().clear();  // Clear the existing children in the VBox
+        ClassVBox.getChildren().clear(); // Clear current items before refreshing
 
-        List<ClassModel> classes = getClassesForStudent(studentId);  // Fetch updated class list
-        if (classes.isEmpty()) {
-            lblNoClass.setVisible(true);  // Show a label if no classes are available
-        } else {
-            lblNoClass.setVisible(false);  // Hide label if classes are present
-        }
+        // Retrieve the list of classes (assuming a `getClasses()` method exists that queries the database)
+        List<ClassModel> classes = getClassesForStudent(studentId);
 
-        // Add the class details to the VBox
         for (ClassModel classModel : classes) {
-            // Create a label for each class
-            Label classLabel = new Label(classModel.getClassName() + " (" + classModel.getClassCode() + ")");
-            ClassVBox.getChildren().add(classLabel);  // Add the label to the VBox
+            try {
+                // Load the ClassCard FXML for each class
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("classcard.fxml"));
+                HBox classCard = loader.load();
+
+                // Get the controller for ClassCard and set class details
+
+                classcardController controller = loader.getController();
+                controller.setClassDetails(classModel.getClassName(), classModel.getClassCode());
+
+                // Add the card to the VBox
+                ClassVBox.getChildren().add(classCard);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle any loading errors here
+            }
         }
     }
     @FXML
