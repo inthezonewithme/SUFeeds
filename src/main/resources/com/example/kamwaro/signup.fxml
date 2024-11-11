@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="405.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamwaro.LoginController">
+   <children>
+      <VBox layoutX="-2.0" prefHeight="409.0" prefWidth="323.0" styleClass="vbox_bg_right" stylesheets="@../../../loginpage.css">
+         <children>
+            <HBox prefHeight="125.0" prefWidth="301.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../add-friend.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox prefHeight="45.0" prefWidth="301.0">
+               <children>
+                  <TextField fx:id="FName" prefHeight="38.0" prefWidth="239.0" promptText="Fisrt Name" style="-fx-background-radius: 50; -fx-border-radius: 50;" />
+               </children>
+            </HBox>
+            <HBox prefHeight="43.0" prefWidth="301.0">
+               <children>
+                  <TextField fx:id="LName" prefHeight="38.0" prefWidth="239.0" promptText="Last Name" style="-fx-background-radius: 50; -fx-border-radius: 50;" />
+               </children>
+            </HBox>
+            <HBox prefHeight="45.0" prefWidth="301.0">
+               <children>
+                  <TextField fx:id="ID" prefHeight="38.0" prefWidth="239.0" promptText="ID No" style="-fx-background-radius: 50; -fx-border-radius: 50;" />
+               </children>
+            </HBox>
+            <HBox prefHeight="63.0" prefWidth="301.0">
+               <children>
+                  <PasswordField fx:id="Pass" prefHeight="41.0" prefWidth="239.0" promptText="Password" style="-fx-background-radius: 50; -fx-border-radius: 50;" />
+               </children>
+            </HBox>
+            <HBox prefHeight="65.0" prefWidth="323.0">
+               <children>
+                  <Button id="CreateButton" fx:id="CreateButton" mnemonicParsing="false" onAction="#handleSignUp" prefHeight="51.0" prefWidth="195.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: transparent;" styleClass="cursor_hand" stylesheets="@../../../loginpage.css" text="Create Account" textFill="#fff9f9">
+                     <font>
+                        <Font name="Calibri Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
