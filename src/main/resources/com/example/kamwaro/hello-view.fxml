@@ -53,7 +53,7 @@
                   <URL value="@../../../loginpage.css" />
                </stylesheets>
         </Button>
-        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="205.0" style="-fx-background-radius: 25;" styleClass="cursor_hand" text="Feedback">
+        <Button fx:id="btnTopics" mnemonicParsing="false" onAction="#showTopicsPane" prefHeight="46.0" prefWidth="205.0" style="-fx-background-radius: 25;" styleClass="cursor_hand" text="Topics">
           <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
           </padding>
@@ -68,7 +68,21 @@
                   <URL value="@../../../loginpage.css" />
                </stylesheets>
         </Button>
-        <HBox prefHeight="267.0" prefWidth="216.0" />
+        <HBox prefHeight="267.0" prefWidth="216.0">
+               <children>
+                  <Button fx:id="btnFeedbackl" mnemonicParsing="false" onAction="#showFeedbackPane" prefHeight="49.0" prefWidth="233.0" style="-fx-background-radius: 25;" styleClass="cursor_hand" text="Feedback">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <font>
+                        <Font name="Calibri Bold" size="18.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@../../../dash.css" />
+                        <URL value="@../../../loginpage.css" />
+                     </stylesheets>
+                  </Button>
+               </children></HBox>
         <Button fx:id="btnSignOut" mnemonicParsing="false" onAction="#handleSignOut" prefHeight="49.0" prefWidth="233.0" style="-fx-background-radius: 25;" styleClass="cursor_hand" text="Sign Out" textFill="#a86767">
           <VBox.margin>
             <Insets />
@@ -226,12 +240,19 @@
         </VBox>
       </children>
     </VBox>
-    <AnchorPane id="lblNoClass" fx:id="classpane" layoutX="223.0" layoutY="2.0" prefHeight="686.0" prefWidth="1041.0" style="-fx-background-color: white; -fx-background-radius: 25;" visible="false">
+    <AnchorPane fx:id="classpane" layoutX="223.0" layoutY="2.0" prefHeight="686.0" prefWidth="1041.0" style="-fx-background-color: white; -fx-background-radius: 25;" visible="false">
          <children>
-            <Button id="btnAddClass" layoutX="33.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleAddClasses" prefHeight="62.0" prefWidth="82.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: black;" styleClass="cursor_hand" stylesheets="@../../../loginpage.css" text="Add" textFill="WHITE">
+            <Button id="btnAddClass" layoutX="33.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleAddClasses" prefHeight="49.0" prefWidth="71.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: gray;" styleClass="cursor_hand" stylesheets="@../../../loginpage.css" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../add.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
             <Label alignment="CENTER" layoutX="118.0" layoutY="26.0" prefHeight="65.0" prefWidth="505.0" text="My Classes">
                <font>
@@ -240,7 +261,7 @@
             </Label>
             <ScrollPane fitToWidth="true" layoutX="50.0" layoutY="104.0" prefHeight="482.0" prefWidth="576.0">
                <content>
-                  <VBox fx:id="ClassVBox" prefHeight="476.0" prefWidth="569.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 25; -fx-border-radius: 50;">
+                  <VBox fx:id="ClassVBox" prefHeight="476.0" prefWidth="558.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 25; -fx-border-radius: 50;">
                      <children>
                         <HBox prefHeight="62.0" prefWidth="493.0">
                            <children>
@@ -255,7 +276,110 @@
                   </VBox>
                </content>
             </ScrollPane>
+            <Button layoutX="593.0" layoutY="39.0" mnemonicParsing="false" onAction="#deleteSelectedClass" prefHeight="49.0" prefWidth="65.0" style="-fx-background-color: gray; -fx-background-radius: 50; -fx-border-radius: 50;">
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../trash.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
     </AnchorPane>
+      <AnchorPane fx:id="topicsPane" layoutX="226.0" layoutY="9.0" prefHeight="677.0" prefWidth="1048.0" style="-fx-background-color: white; -fx-background-radius: 25;" visible="false">
+         <children>
+            <Button id="btnAddClass" layoutX="33.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleAddClasses" prefHeight="49.0" prefWidth="71.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: gray;" styleClass="cursor_hand" stylesheets="@../../../loginpage.css" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../add.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label alignment="CENTER" layoutX="118.0" layoutY="26.0" prefHeight="65.0" prefWidth="469.0" text="Semester Topics">
+               <font>
+                  <Font name="Calibri Bold" size="24.0" />
+               </font>
+            </Label>
+            <ScrollPane fitToWidth="true" layoutX="50.0" layoutY="104.0" prefHeight="482.0" prefWidth="576.0">
+               <content>
+                  <VBox fx:id="ClassVBox1" prefHeight="476.0" prefWidth="558.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 25; -fx-border-radius: 50;">
+                     <children>
+                        <HBox prefHeight="62.0" prefWidth="493.0">
+                           <children>
+                              <Label fx:id="lblNoTopic" prefHeight="62.0" prefWidth="521.0" text="No Topics Found">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <Button layoutX="593.0" layoutY="39.0" mnemonicParsing="false" onAction="#deleteSelectedClass" prefHeight="49.0" prefWidth="65.0" style="-fx-background-color: gray; -fx-background-radius: 50; -fx-border-radius: 50;">
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../trash.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="feedbackPane" layoutX="226.0" layoutY="8.0" prefHeight="686.0" prefWidth="1041.0" style="-fx-background-color: white; -fx-background-radius: 25;" visible="false">
+         <children>
+            <Button id="btnAddClass" layoutX="33.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleAddClasses" prefHeight="49.0" prefWidth="71.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: gray;" styleClass="cursor_hand" stylesheets="@../../../loginpage.css" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../add.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label alignment="CENTER" layoutX="118.0" layoutY="26.0" prefHeight="65.0" prefWidth="469.0" text="What's on your mind?">
+               <font>
+                  <Font name="Calibri Bold" size="24.0" />
+               </font>
+            </Label>
+            <ScrollPane fitToWidth="true" layoutX="50.0" layoutY="104.0" prefHeight="482.0" prefWidth="576.0">
+               <content>
+                  <VBox fx:id="FeedbackVBox" prefHeight="476.0" prefWidth="558.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 25; -fx-border-radius: 50;">
+                     <children>
+                        <HBox prefHeight="62.0" prefWidth="493.0">
+                           <children>
+                              <Label fx:id="lblNoFeedback" prefHeight="62.0" prefWidth="521.0" text="Not yet commented">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <Button layoutX="593.0" layoutY="39.0" mnemonicParsing="false" onAction="#deleteSelectedClass" prefHeight="49.0" prefWidth="65.0" style="-fx-background-color: gray; -fx-background-radius: 50; -fx-border-radius: 50;">
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../trash.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
   </children>
 </AnchorPane>

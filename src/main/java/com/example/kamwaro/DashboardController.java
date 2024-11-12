@@ -14,7 +14,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,15 +24,18 @@ public class DashboardController {
     private AnchorPane classpane;
 
     @FXML
-    private Button btnSignOut;
-
-    @FXML
-    private AnchorPane homePane;
-    @FXML
     private AnchorPane feedbackPane;
-
+    @FXML
+    private AnchorPane topicsPane;
     @FXML
     private VBox boxMenu;
+
+    @FXML
+    private Button btnSignOut;
+
+
+
+
 
     @FXML
     private Label lblNoClass;
@@ -59,6 +61,7 @@ public class DashboardController {
 
     @FXML
     private VBox ClassVBox;
+    private HBox selectedHBox;
 
     // Setter method to receive student ID
 
@@ -116,6 +119,8 @@ public class DashboardController {
     private void showMenuPane() {
         boxMenu.setVisible(true);
         classpane.setVisible(false);
+        feedbackPane.setVisible(false);
+        topicsPane.setVisible(false);
     }
 
     @FXML
@@ -125,32 +130,65 @@ public class DashboardController {
         } else {
             classpane.setVisible(true);
             boxMenu.setVisible(false);
+            feedbackPane.setVisible(false);
+            topicsPane.setVisible(false);
             refreshClassesVBox();
         }
     }
-
-    private void displayClasses() {
-        // Clear existing items in the VBox to prevent duplication
-        ClassVBox.getChildren().clear();
-
-        // Retrieve classes from the database for the current student
-        List<ClassModel> classes = getClassesForStudent(studentId);
-
-        // Check if there are any classes to display
-        if (classes.isEmpty()) {
-            // Display a message if no classes are found
-            lblNoClass.setText("No classes found for this student.");
+    @FXML
+    private void showFeedbackPane(){
+        if (feedbackPane == null) {
+            System.out.println("feedbackPane is null");
         } else {
-            lblNoClass.setText(""); // Clear the "No classes" message if there are classes
-
-            // Add each class to the VBox
-            for (ClassModel classModel : classes) {
-                // Create a label for each class (you can customize this further)
-                Label classLabel = new Label(classModel.getClassName() + " (" + classModel.getClassCode() + ")");
-                ClassVBox.getChildren().add(classLabel);  // Add the label to the VBox
-            }
+            classpane.setVisible(false);
+            boxMenu.setVisible(false);
+            feedbackPane.setVisible(true);
+            topicsPane.setVisible(false);
         }
     }
+    @FXML
+    private void showTopicsPane(){
+        if (topicsPane == null) {
+            System.out.println("topicsPane is null");
+        } else {
+            classpane.setVisible(false);
+            boxMenu.setVisible(false);
+            feedbackPane.setVisible(false);
+            topicsPane.setVisible(true);
+
+        }
+    }
+
+    private HBox createClassHBox(String className) {
+        HBox hbox = new HBox();
+        Label label = new Label(className);
+        hbox.getChildren().add(label);
+        hbox.setStyle("-fx-background-color: transparent;");  // Default style
+
+        // Add click event for selection
+        hbox.setOnMouseClicked(event -> {
+            if (selectedHBox != null) {
+                // Deselect the previously selected HBox
+                selectedHBox.setStyle("-fx-background-color: transparent;");
+            }
+
+            // Select this HBox and change its style
+            hbox.setStyle("-fx-background-color: lightblue;");
+            selectedHBox = hbox;  // Update the selected HBox reference
+        });
+
+        return hbox;
+    }
+    public void deleteSelectedClass() {
+        if (selectedHBox != null) {
+            ClassVBox.getChildren().remove(selectedHBox);  // Remove the selected HBox from the VBox
+            selectedHBox = null;  // Clear the selected reference
+        } else {
+            System.out.println("No class selected to delete.");
+            // Optionally, display a message to the user
+        }
+    }
+
     private List<ClassModel> getClassesForStudent(String studentId) {
         List<ClassModel> classes = new ArrayList<>();
         String query = "SELECT * FROM tbl_class WHERE Student_Number = ?";
@@ -183,6 +221,8 @@ public class DashboardController {
             // Load the add class FXML
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addclass.fxml"));  // Adjust the path to your add class FXML
             Scene classScene = new Scene(fxmlLoader.load(), 321, 405);
+
+
 
             // Create a new Stage (window) for the add class screen
             Stage classStage = new Stage();

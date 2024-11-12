@@ -16,3 +16,9 @@
 .login_button:hover{
     -fx-background-color:#d39d50
 }
+
+.selected {
+    -fx-background-color: lightblue; /* Example color for selection */
+    -fx-border-color: darkblue;
+    -fx-border-width: 2px;
+}

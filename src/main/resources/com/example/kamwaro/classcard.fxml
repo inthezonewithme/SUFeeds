@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="505.0" style="-fx-background-color: #f7e575; -fx-border-color: #f9ba35;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamwaro.classcardController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="576.0" style="-fx-background-color: #f7e575; -fx-border-color: #f9ba35;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamwaro.classcardController">
    <children>
       <Label fx:id="classNameLabel" alignment="CENTER" prefHeight="39.0" prefWidth="256.0" text="Unit Name">
          <font>
