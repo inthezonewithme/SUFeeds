@@ -44,6 +44,9 @@ public class DashboardController {
     private Label HeaderClasses;
 
     public static String studentId;
+    public static String fname;
+
+
 
     @FXML
     private Button AddClassButton;
@@ -81,7 +84,8 @@ public class DashboardController {
 
     @FXML
     private VBox FeedbackVBox;
-
+    @FXML
+    private VBox ReviewsVBox;
 
 
 
@@ -143,6 +147,9 @@ public class DashboardController {
         classpane.setVisible(false);
         feedbackPane.setVisible(false);
         topicsPane.setVisible(false);
+        loadStudentFeedback(studentId);
+
+
     }
 
     @FXML
@@ -563,7 +570,7 @@ public class DashboardController {
     }
     @FXML
     private boolean insertFeedbackIntoDatabase(String topicName, String comment){
-        String query = "INSERT INTO tbl_feedback (Topic_Name, Comment, Student_Number) VALUES (?, ?, ?)";
+        String query = "INSERT INTO tbl_feedback (Topic_Name, Comment, Student_Number, First_Name) VALUES (?, ?, ?,?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -571,7 +578,8 @@ public class DashboardController {
             // Assuming studentId is set earlier in the controller
             pstmt.setString(1, topicName);
             pstmt.setString(2, comment);
-            pstmt.setString(3, studentId);  // Assuming this was set earlier (for the logged-in student)
+            pstmt.setString(3, studentId);
+            pstmt.setString(4, fname);// Assuming this was set earlier (for the logged-in student)
 
             int rowsAffected = pstmt.executeUpdate();  // Execute the insert query
 
@@ -606,5 +614,55 @@ public class DashboardController {
         return feedback;
     }
 
+    public List<ReviewsModel> getFeedbackByStudentNumber(String studentNumber) {
+        List<ReviewsModel> feedbackList = new ArrayList<>();
+        String query = "SELECT * FROM tbl_feedback";
 
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                // Create a ReviewsModel for each feedback entry
+                ReviewsModel feedback = new ReviewsModel(
+                        rs.getString("First_Name"),
+                        rs.getString("Comment")
+                );
+                feedbackList.add(feedback);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return feedbackList;
+    }
+
+    public void loadStudentFeedback(String studentNumber) {
+        // Clear any existing feedback cards
+        ReviewsVBox.getChildren().clear();
+
+        // Fetch feedback entries for the student
+        List<ReviewsModel> feedbackList = getFeedbackByStudentNumber(studentNumber);
+
+        for (ReviewsModel feedback : feedbackList) {
+            try {
+                // Load the feedback card FXML
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("reviewscard.fxml"));
+                HBox feedbackCard = loader.load();
+
+                // Get the controller of the feedback card and set the feedback data
+                reviewscardController cardController = loader.getController();
+                cardController.setFeedbackData(feedback);
+
+                // Add the card to the VBox
+                ReviewsVBox.getChildren().add(feedbackCard);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
 }

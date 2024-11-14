@@ -79,6 +79,7 @@ public class LoginController {
 
             DashboardController.studentId = username;
 
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
             Parent root = loader.load();
 
@@ -100,7 +101,7 @@ public class LoginController {
     }
 
     private boolean authenticate(String username, String password) {
-        String query = "SELECT * FROM tbl_users WHERE Student_Number = ? AND Password = ?";
+        String query = "SELECT First_Name FROM tbl_users WHERE Student_Number = ? AND Password = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement ps = connection.prepareStatement(query)) {
@@ -109,14 +110,24 @@ public class LoginController {
             ps.setString(2, password);
 
             try (ResultSet rs = ps.executeQuery()) {
-                return rs.next(); // Returns true if a record is found
+                if (rs.next()) { // If a record is found
+                    // Retrieve the first name from the result set
+                    String firstName = rs.getString("First_Name");
+
+                    // Set the first name to the static field in DashboardController
+                    DashboardController.fname = firstName;
+
+                    // Return true to indicate successful authentication
+                    return true;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
             showError("Database error: " + e.getMessage());
-            return false;
         }
+        return false; // Authentication failed
     }
+
 
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -169,6 +180,7 @@ public class LoginController {
     @FXML
     private void handleSignUp() {
         String fname = FName.getText();
+        DashboardController.fname = fname;
         String lname = LName.getText();
         String stdno = ID.getText();
         String password = Pass.getText();
