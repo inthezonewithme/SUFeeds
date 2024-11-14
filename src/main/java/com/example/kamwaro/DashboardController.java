@@ -57,11 +57,19 @@ public class DashboardController {
     @FXML
     private TextField ClassCodeField;
 
+    @FXML
+    private TextField TopicNameField;
+    @FXML
+    private TextField WeekNumberField;
+
 
 
     @FXML
     private VBox ClassVBox;
     private HBox selectedHBox;
+
+    @FXML
+    private VBox TopicVBox;
 
     // Setter method to receive student ID
 
@@ -155,30 +163,11 @@ public class DashboardController {
             boxMenu.setVisible(false);
             feedbackPane.setVisible(false);
             topicsPane.setVisible(true);
+            refreshTopicVBox();
 
         }
     }
 
-    private HBox createClassHBox(String className) {
-        HBox hbox = new HBox();
-        Label label = new Label(className);
-        hbox.getChildren().add(label);
-        hbox.setStyle("-fx-background-color: transparent;");  // Default style
-
-        // Add click event for selection
-        hbox.setOnMouseClicked(event -> {
-            if (selectedHBox != null) {
-                // Deselect the previously selected HBox
-                selectedHBox.setStyle("-fx-background-color: transparent;");
-            }
-
-            // Select this HBox and change its style
-            hbox.setStyle("-fx-background-color: lightblue;");
-            selectedHBox = hbox;  // Update the selected HBox reference
-        });
-
-        return hbox;
-    }
     public void deleteSelectedClass() {
         if (selectedHBox != null) {
             ClassVBox.getChildren().remove(selectedHBox);  // Remove the selected HBox from the VBox
@@ -189,31 +178,6 @@ public class DashboardController {
         }
     }
 
-    private List<ClassModel> getClassesForStudent(String studentId) {
-        List<ClassModel> classes = new ArrayList<>();
-        String query = "SELECT * FROM tbl_class WHERE Student_Number = ?";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setString(1, studentId);
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                String className = rs.getString("Class_Name");
-                String classCode = rs.getString("Class_ID");
-
-                // Create a ClassModel instance for each class
-                ClassModel classModel = new ClassModel(className, classCode);
-                classes.add(classModel);  // Add to the list
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return classes;  // Return the list of ClassModel objects
-    }
 
     @FXML
     private void handleAddClasses() {
@@ -273,6 +237,32 @@ public class DashboardController {
         }
     }
 
+    private List<ClassModel> getClassesForStudent(String studentId) {
+        List<ClassModel> classes = new ArrayList<>();
+        String query = "SELECT * FROM tbl_class WHERE Student_Number = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, studentId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String className = rs.getString("Class_Name");
+                String classCode = rs.getString("Class_ID");
+
+                // Create a ClassModel instance for each class
+                ClassModel classModel = new ClassModel(className, classCode);
+                classes.add(classModel);  // Add to the list
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return classes;  // Return the list of ClassModel objects
+    }
+
     @FXML
     private void refreshClassesVBox() {
         if (ClassVBox == null) {
@@ -325,5 +315,161 @@ public class DashboardController {
             return false;
         }
     }
+
+
+    @FXML
+    private void handleAddTopics(){
+        try {
+            // Load the add class FXML
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addtopic.fxml"));  // Adjust the path to your add class FXML
+            Scene classScene = new Scene(fxmlLoader.load(), 321, 405);
+
+
+
+            // Create a new Stage (window) for the add class screen
+            Stage topicStage = new Stage();
+            topicStage.setTitle("Add Topic");
+            topicStage.setScene(classScene);
+            topicStage.setResizable(false);
+
+            // Show the classes window
+            topicStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the error (could log it, show a message to the user, etc.)
+        }
+    }
+    @FXML
+    private void handleAddTopicButtonClick(){
+    String topicName = TopicNameField.getText();
+    String weekNumber = WeekNumberField.getText();
+
+    if(topicName.isEmpty() || weekNumber.isEmpty()){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Input Error");
+        alert.setHeaderText("Please fill in both topic name and week number.");
+        alert.showAndWait();
+        return;
+
+        }
+        if (insertTopicIntoDatabase(topicName, weekNumber)) {
+            // After successful insertion, refresh the VBox with the updated list of classes
+
+            refreshTopicVBox();
+
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Topic Added");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("The topic '" + topicName + "' has been successfully added.");
+            successAlert.showAndWait();
+
+        } else {
+            // Show an alert if the insertion failed
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Database Error");
+            alert.setHeaderText("Failed to add topic.");
+            alert.showAndWait();
+        }
+
+    }
+
+    @FXML
+    private void refreshTopicVBox() {
+        if (TopicVBox == null) {
+            System.out.println("TopicVBox is not initialized yet.");
+            return;  // Early return if TopicVBox is not ready
+        }
+
+        TopicVBox.getChildren().clear(); // Clear current items before refreshing
+
+        // Retrieve the list of topics for the student
+        List<TopicModel> topics = getTopicsForStudent(studentId);
+
+        for (TopicModel topicModel : topics) {
+            try {
+                // Load the ClassCard FXML for each class
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("topiccard.fxml"));
+                HBox topicCard = loader.load();
+
+                // Get the controller for ClassCard and set class details
+
+                topiccardController controller = loader.getController();
+                controller.setTopicDetails(topicModel.getTopicName(), topicModel.getWeekNumber());
+
+
+
+                // Add the card to the VBox
+                TopicVBox.getChildren().add(topicCard);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle any loading errors here
+            }
+        }
+    }
+
+    @FXML
+    private boolean insertTopicIntoDatabase(String topicName, String week_number){
+        String query = "INSERT INTO tbl_topic (Topic_Name, Week_Number, Student_Number) VALUES (?, ?, ?)";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            // Assuming studentId is set earlier in the controller
+            pstmt.setString(1, topicName);
+            pstmt.setString(2, week_number);
+            pstmt.setString(3, studentId);  // Assuming this was set earlier (for the logged-in student)
+
+            int rowsAffected = pstmt.executeUpdate();  // Execute the insert query
+
+            return rowsAffected > 0;  // Return true if the insertion was successful
+
+        } catch (SQLException e) {
+            e.printStackTrace();  // Handle the error as needed
+            return false;
+        }
+    }
+    private List<TopicModel> getTopicsForStudent(String StudentId){
+        List<TopicModel> topics = new ArrayList<>();
+        String sql = "SELECT * FROM tbl_topic where Student_Number = ?";
+
+        try(Connection conn = DatabaseConnection.getConnection()){
+            PreparedStatement psmt = conn.prepareStatement(sql);
+
+            psmt.setString(1, StudentId);
+            ResultSet res = psmt.executeQuery();
+
+            while(res.next()){
+                String topicName = res.getString("Topic_Name");
+                String weekNumber = res.getString("Week_Number");
+
+                TopicModel topicModel = new TopicModel(topicName,weekNumber);
+                topics.add(topicModel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return topics;
+    }
+
+
+    @FXML
+    private void handleAddFeedback(){
+
+    }
+    @FXML
+    private void handleAddFeedbackButtonClick(){
+
+    }
+    @FXML
+    private void refreshFeedbackVBox(){
+
+    }
+    @FXML
+    private boolean insertFeedbackIntoDatabase(String topicName, String week_number){
+        return false;
+    }
+
 
 }
