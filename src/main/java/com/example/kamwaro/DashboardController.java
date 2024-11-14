@@ -62,6 +62,14 @@ public class DashboardController {
     @FXML
     private TextField WeekNumberField;
 
+    @FXML
+    private TextField TopicField;
+    @FXML
+    private TextField FeedbackField;
+
+    @FXML
+    private HBox HBoxHeader;
+
 
 
     @FXML
@@ -70,6 +78,12 @@ public class DashboardController {
 
     @FXML
     private VBox TopicVBox;
+
+    @FXML
+    private VBox FeedbackVBox;
+
+
+
 
     // Setter method to receive student ID
 
@@ -150,8 +164,11 @@ public class DashboardController {
         } else {
             classpane.setVisible(false);
             boxMenu.setVisible(false);
-            feedbackPane.setVisible(true);
             topicsPane.setVisible(false);
+            feedbackPane.setVisible(true);
+
+            refreshFeedbackVBox();
+
         }
     }
     @FXML
@@ -456,19 +473,137 @@ public class DashboardController {
 
     @FXML
     private void handleAddFeedback(){
+        try {
+            // Load the add class FXML
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addfeedback.fxml"));  // Adjust the path to your add class FXML
+            Scene classScene = new Scene(fxmlLoader.load(), 321, 405);
 
+
+
+            // Create a new Stage (window) for the add class screen
+            Stage feedbackStage = new Stage();
+            feedbackStage.setTitle("Add Feedback");
+            feedbackStage.setScene(classScene);
+            feedbackStage.setResizable(false);
+
+            // Show the classes window
+            feedbackStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the error (could log it, show a message to the user, etc.)
+        }
     }
     @FXML
     private void handleAddFeedbackButtonClick(){
+        String topicName = TopicField.getText();
+        String comment = FeedbackField.getText();
+
+        if(topicName.isEmpty() || comment.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Input Error");
+            alert.setHeaderText("Please fill in both topic name and Feedback.");
+            alert.showAndWait();
+            return;
+
+        }
+        if (insertFeedbackIntoDatabase(topicName, comment)) {
+            // After successful insertion, refresh the VBox with the updated list of classes
+
+            refreshFeedbackVBox();
+
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Feedback Added");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Thank you for your comment");
+            successAlert.showAndWait();
+
+        } else {
+            // Show an alert if the insertion failed
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Database Error");
+            alert.setHeaderText("Failed to add Feedback.");
+            alert.showAndWait();
+        }
 
     }
     @FXML
     private void refreshFeedbackVBox(){
+        if (FeedbackVBox == null) {
+            System.out.println("FeedbackVBox is not initialized yet.");
+            return;  // Early return if TopicVBox is not ready
+        }
 
+        FeedbackVBox.getChildren().clear(); // Clear current items before refreshing
+
+        // Retrieve the list of topics for the student
+        List<FeedbackModel> feedback = getFeedbackForStudent(studentId);
+
+        for (FeedbackModel feedbackModel : feedback) {
+            try {
+                // Load the ClassCard FXML for each class
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("feedbackcard.fxml"));
+                HBox topicCard = loader.load();
+
+                // Get the controller for ClassCard and set class details
+
+                feedbackcardController controller = loader.getController();
+                controller.setFeedbackDetails(feedbackModel.getTopicName(), feedbackModel.getComment());
+
+
+
+                // Add the card to the VBox
+
+                FeedbackVBox.getChildren().add(topicCard);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle any loading errors here
+            }
+        }
     }
     @FXML
-    private boolean insertFeedbackIntoDatabase(String topicName, String week_number){
-        return false;
+    private boolean insertFeedbackIntoDatabase(String topicName, String comment){
+        String query = "INSERT INTO tbl_feedback (Topic_Name, Comment, Student_Number) VALUES (?, ?, ?)";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            // Assuming studentId is set earlier in the controller
+            pstmt.setString(1, topicName);
+            pstmt.setString(2, comment);
+            pstmt.setString(3, studentId);  // Assuming this was set earlier (for the logged-in student)
+
+            int rowsAffected = pstmt.executeUpdate();  // Execute the insert query
+
+            return rowsAffected > 0;  // Return true if the insertion was successful
+
+        } catch (SQLException e) {
+            e.printStackTrace();  // Handle the error as needed
+            return false;
+        }
+    }
+    private List<FeedbackModel> getFeedbackForStudent(String StudentId) {
+        List<FeedbackModel> feedback = new ArrayList<>();
+        String sql = "SELECT * FROM tbl_feedback where Student_Number = ?";
+
+        try(Connection conn = DatabaseConnection.getConnection()){
+            PreparedStatement psmt = conn.prepareStatement(sql);
+
+            psmt.setString(1, StudentId);
+            ResultSet res = psmt.executeQuery();
+
+            while(res.next()){
+                String topicName = res.getString("Topic_Name");
+                String comment = res.getString("Comment");
+
+                FeedbackModel feedbackModel = new FeedbackModel(topicName,comment);
+                feedback.add(feedbackModel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return feedback;
     }
 
 

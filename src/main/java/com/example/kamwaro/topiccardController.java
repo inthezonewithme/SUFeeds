@@ -12,7 +12,7 @@ public class topiccardController {
 
     public  void setTopicDetails(String topicName, String weekNumber) {
         topicNameLabel.setText(topicName);
-        weekNumberLabel.setText(weekNumber);
+        weekNumberLabel.setText("Week "+weekNumber);
     }
 
 }

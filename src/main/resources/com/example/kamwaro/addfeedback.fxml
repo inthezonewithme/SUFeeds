@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -25,18 +26,23 @@
             <HBox prefHeight="45.0" prefWidth="301.0" />
             <HBox prefHeight="43.0" prefWidth="301.0">
                <children>
-                  <TextField fx:id="TopicNameField" prefHeight="39.0" prefWidth="239.0" promptText="Topic Name" style="-fx-background-radius: 50; -fx-border-radius: 50;" />
+                  <TextField fx:id="TopicField" prefHeight="39.0" prefWidth="239.0" promptText="Topic Name" style="-fx-background-radius: 50; -fx-border-radius: 50;">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin></TextField>
                </children>
             </HBox>
-            <HBox prefHeight="45.0" prefWidth="301.0">
+            <HBox prefHeight="114.0" prefWidth="323.0">
                <children>
-                  <TextField fx:id="WeekNumberField" prefHeight="38.0" prefWidth="239.0" promptText="Week Number" style="-fx-background-radius: 50; -fx-border-radius: 50;" />
+                  <TextField fx:id="FeedbackField" prefHeight="58.0" prefWidth="239.0" promptText="What's on your mind?" style="-fx-background-radius: 25; -fx-border-radius: 25;">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin></TextField>
                </children>
             </HBox>
-            <HBox prefHeight="63.0" prefWidth="301.0" />
             <HBox prefHeight="65.0" prefWidth="323.0">
                <children>
-                  <Button id="AddButton" fx:id="AddButton" mnemonicParsing="false" onAction="#handleAddTopicButtonClick" prefHeight="51.0" prefWidth="195.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: transparent;" styleClass="cursor_hand" stylesheets="@../../../loginpage.css" text="Add Topic" textFill="#fff9f9">
+                  <Button id="AddButton" fx:id="AddButton" mnemonicParsing="false" onAction="#handleAddFeedbackButtonClick" prefHeight="51.0" prefWidth="195.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: transparent;" styleClass="cursor_hand" stylesheets="@../../../loginpage.css" text="Comment" textFill="#fff9f9">
                      <font>
                         <Font name="Calibri Bold" size="18.0" />
                      </font>

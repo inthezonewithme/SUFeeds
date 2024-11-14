@@ -5,15 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6583bdd-abd4-4fab-a4bb-871bfc0d9566" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/TopicModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/topiccardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/feedbackcard.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/topiccard.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/FeedbackModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/feedbackcardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/ClassModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/ClassModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/topiccardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/topiccardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/addtopic.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/addtopic.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/classcard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/classcard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/feedbackcard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/feedbackcard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/topiccard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/topiccard.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
