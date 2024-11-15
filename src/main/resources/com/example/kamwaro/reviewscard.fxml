@@ -4,12 +4,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
+
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="77.0" prefWidth="494.0" style="-fx-background-color: #2A3F5D; -fx-border-color: blaack;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamwaro.reviewscardController">
    <children>
       <Label fx:id="fullNameLabel" alignment="CENTER" prefHeight="103.0" prefWidth="215.0" text="Label" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
-         </font></Label>
+         </font>
+      </Label>
       <Label fx:id="feedbackLabel" alignment="CENTER" prefHeight="119.0" prefWidth="392.0" text="Label" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />

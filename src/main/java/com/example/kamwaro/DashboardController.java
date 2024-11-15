@@ -307,7 +307,7 @@ public class DashboardController {
                 // Get the controller for ClassCard and set class details
 
                 classcardController controller = loader.getController();
-                controller.setClassDetails(classModel.getClassName(), classModel.getClassCode());
+                controller.setClassDetails(classModel.getClassName(), classModel.getClassCode(),this);
 
                 // Add the card to the VBox
                 ClassVBox.getChildren().add(classCard);
@@ -418,7 +418,7 @@ public class DashboardController {
                 // Get the controller for ClassCard and set class details
 
                 topiccardController controller = loader.getController();
-                controller.setTopicDetails(topicModel.getTopicName(), topicModel.getWeekNumber());
+                controller.setTopicDetails(topicModel.getTopicName(), topicModel.getWeekNumber(),this);
 
 
 
@@ -554,7 +554,7 @@ public class DashboardController {
                 // Get the controller for ClassCard and set class details
 
                 feedbackcardController controller = loader.getController();
-                controller.setFeedbackDetails(feedbackModel.getTopicName(), feedbackModel.getComment());
+                controller.setFeedbackDetails(feedbackModel.getTopicName(), feedbackModel.getComment(), this);
 
 
 
@@ -665,4 +665,64 @@ public class DashboardController {
 
 
     }
+    public void deleteClassFromDatabase(String classId){
+        try {
+            String deleteQuery = "DELETE FROM tbl_class WHERE Class_id = ?";
+            PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(deleteQuery);
+            preparedStatement.setString(1, classId);
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("Class deleted successfully from the database.");
+
+                // Step 2: Refresh the VBox to update displayed classes
+                refreshClassesVBox();
+            } else {
+                System.out.println("No class found with the provided ID.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteTopicFromDatabase(String topicName){
+        try {
+            String deleteQuery = "DELETE FROM tbl_topic WHERE Topic_Name = ?";
+            PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(deleteQuery);
+            preparedStatement.setString(1, topicName);
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("Topic deleted successfully from the database.");
+
+                // Step 2: Refresh the VBox to update displayed classes
+                refreshTopicVBox();
+            } else {
+                System.out.println("No topic found with the provided name.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void deleteFeedbackFromDatabase(String topicName){
+        try {
+            String deleteQuery = "DELETE FROM tbl_feedback WHERE Topic_Name = ?";
+            PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(deleteQuery);
+            preparedStatement.setString(1, topicName);
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("Feedback deleted successfully from the database.");
+
+                // Step 2: Refresh the VBox to update displayed feedback
+                refreshFeedbackVBox();
+            } else {
+                System.out.println("No topic found with the provided name.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

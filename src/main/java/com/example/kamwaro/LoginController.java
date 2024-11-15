@@ -165,7 +165,10 @@ public class LoginController {
             dashboardStage.setScene(dashboardScene);
 
             // Show the dashboard window
+         
+
             dashboardStage.show();
+
 
             // Close the current login window
             closeLoginWindow();

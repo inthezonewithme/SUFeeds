@@ -19,7 +19,7 @@
             <Font name="Calibri Bold" size="18.0" />
          </font>
       </Label>
-      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="51.0" style="-fx-background-color: #2A3F5D;" styleClass="cursor_hand" stylesheets="@../../../loginpage.css">
+      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="51.0" style="-fx-background-color: #2A3F5D;" styleClass="cursor_hand" stylesheets="@../../../loginpage.css" onAction="#handleDelete">
          <graphic>
             <ImageView fitHeight="33.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
