@@ -6,15 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a6583bdd-abd4-4fab-a4bb-871bfc0d9566" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/classcardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/classcardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/feedbackcardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/feedbackcardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/topiccardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/kamwaro/topiccardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/classcard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/classcard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/feedbackcard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/feedbackcard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/reviewscard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/reviewscard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/topiccard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/kamwaro/topiccard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +25,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "inthezonewithme"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/inthezonewithme/SUFeeds.git",
+    "accountId": "350fecb1-3237-4baa-9584-5fc6e0ac9dd1"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/resources/com/example/kamwaro/hello-view.fxml" root0="SKIP_INSPECTION" />
   </component>
@@ -57,13 +61,21 @@
     "Application.LoginForm.executor": "Run",
     "Application.MyConfig.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "C:/Users/kariu/IdeaProjects/kamwaro/src/main/resources/com/example/kamwaro",
-    "last_opened_file_path": "C:/Users/kariu/Downloads/mysql-connector-j-9.1.0/mysql-connector-j-9.1.0/mysql-connector-j-9.1.0.jar",
+    "last_opened_file_path": "C:/Users/kariu/.m2/repository/mysql/mysql-connector-java/8.0.23/mysql-connector-java-8.0.23.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -88,6 +100,14 @@
       </method>
     </configuration>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -96,7 +116,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1731129458716</updated>
+      <workItem from="1739174997562" duration="1104000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
